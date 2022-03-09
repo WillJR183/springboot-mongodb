@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.willianmarques.sbmongodb.domain.User;
+import com.willianmarques.sbmongodb.dto.UserDTO;
 import com.willianmarques.sbmongodb.repositories.UserRepository;
 import com.willianmarques.sbmongodb.services.exceptions.ObjectNotFoundException;
 
@@ -15,6 +16,14 @@ public class UserService {
 	
 	@Autowired
 	private UserRepository userRepository;
+	
+	public User insert(User obj) {
+		return userRepository.insert(obj);
+	}
+	
+	public User fromDTO(UserDTO objDTO) {
+		return new User(objDTO.getId(), objDTO.getName(), objDTO.getEmail());
+	}
 	
 	public List<User> findAll(){
 		return userRepository.findAll();
