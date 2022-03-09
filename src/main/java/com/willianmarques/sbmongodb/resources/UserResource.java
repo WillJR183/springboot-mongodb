@@ -38,6 +38,14 @@ public class UserResource {
 		return ResponseEntity.noContent().build();
 	}
 	
+	@RequestMapping(method = RequestMethod.PUT, value = "/{id}")
+	public ResponseEntity<User> update(@RequestBody UserDTO objDTO, @PathVariable String id) {
+		User user = userService.fromDTO(objDTO);
+		user.setId(id);
+		user = userService.update(user);
+		return ResponseEntity.noContent().build();
+	}
+	
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<UserDTO>> findAll() {
 		List<User> list = userService.findAll();
